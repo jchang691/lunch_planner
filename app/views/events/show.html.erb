@@ -1,0 +1,15 @@
+<% provide(:title, @event.name) %>
+<%= stylesheet_link_tag "event_calendar" %>
+      <h1>
+        <%= @event.name %>
+      </h1>
+	  
+	<p>
+		Start Time: <%= @event.start_at %>
+	</p>
+	<p> 
+		End TIme: <%= @event.end_at %>
+	</p>
+	<p>
+		Votes: <%= @event.votes %>
+	</p>
