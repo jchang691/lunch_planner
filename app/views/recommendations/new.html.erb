@@ -1,0 +1,26 @@
+<% provide(:title, 'New Recommendation') %>
+<h1>New Recommendation</h1>
+
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for [@user, @recommendation] do |f| %>
+	
+	  <%= render 'shared/error_messages_recommendation' %>
+
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+	  
+	  <%= f.label "Start: Format( Month Date, Year, HH:MM:SS )" %>
+      <%= f.text_field :start_at, :value => "#{params[:start_at]}" %>
+	  
+	  <%= f.label :description %>
+      <%= f.text_field :description%>
+	  
+	  <%= f.hidden_field :event_id, :value => params[:event_id] %>
+	  
+	  <%= f.hidden_field :votes, :value => 0 %>
+	  
+      <%= f.submit "Create Rec", class: "btn btn-large btn-primary" %>
+    <% end %>
+  </div>
+</div>
