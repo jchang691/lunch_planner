@@ -3,9 +3,16 @@ SampleApp::Application.routes.draw do
 
   match '/calendar(/:year(/:month(/:day)))' => 'calendar#day', :as => :calendar, :constraints => {:year => /\d{4}/, :month => /\d{1,2}/}
   
-  resources :events
+  resources :events do
+	get 'vote_up', :on => :collection
+  end
+	
 
-  resources :users
+  resources :users do
+	resources :recommendations
+  end
+  
+  
   resources :sessions, only: [:new, :create, :destroy]
   root to: 'static_pages#home'
 

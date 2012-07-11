@@ -3,13 +3,12 @@
       <h1>
         <%= @event.name %>
       </h1>
-	  
-	<p>
-		Start Time: <%= @event.start_at %>
-	</p>
-	<p> 
-		End TIme: <%= @event.end_at %>
-	</p>
-	<p>
-		Votes: <%= @event.votes %>
-	</p>
+	<%= link_to "Create a Rec", new_user_recommendation_path(:user_id=>current_user.id, :start_at=>@today, :event_id=>@event.id)%><br><br>
+	<% if !@recommendations.empty? %>
+		<% @recommendations.each do |x| %>
+			<pre><%= x.votes %>  <%= link_to x.name, [x.user, x] %>
+<%= link_to '+1', vote_up_events_path(:id=>x.id)%>	<%= x.description%></pre>
+		<% end %>
+	<% else %>
+		<center><h3> There are no Recommendations </h3></center>
+	<% end %>

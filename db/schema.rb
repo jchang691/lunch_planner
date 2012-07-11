@@ -11,15 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120706183240) do
-
-  create_table "__use_all_days", :force => true do |t|
-    t.string   "name"
-    t.datetime "start_at"
-    t.datetime "end_at"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
+ActiveRecord::Schema.define(:version => 20120711050119) do
 
   create_table "events", :force => true do |t|
     t.string   "name"
@@ -29,6 +21,19 @@ ActiveRecord::Schema.define(:version => 20120706183240) do
     t.datetime "updated_at", :null => false
     t.integer  "votes"
   end
+
+  create_table "recommendations", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "start_at"
+    t.integer  "user_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.integer  "event_id"
+    t.integer  "votes"
+  end
+
+  add_index "recommendations", ["user_id"], :name => "index_recommendations_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "name"
