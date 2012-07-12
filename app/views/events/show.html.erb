@@ -7,7 +7,7 @@
 	<% if !@recommendations.empty? %>
 		<% @recommendations.each do |x| %>
 			<pre><%= x.votes %>  <%= link_to x.name, [x.user, x] %>
-<%= link_to '+1', vote_up_events_path(:id=>x.id)%>	<%= x.description%></pre>
+<%= link_to '+1', vote_up_events_path(:id=>@event.id, :rec_id=>x.id)%>	<%= x.description%></pre>
 		<% end %>
 	<% else %>
 		<center><h3> There are no Recommendations </h3></center>

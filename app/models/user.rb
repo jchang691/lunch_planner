@@ -14,6 +14,7 @@ class User < ActiveRecord::Base
   has_secure_password
   
   has_many :recommendations
+  has_many :votes
 
   before_save { |user| user.email = email.downcase }
   before_save :create_remember_token

@@ -21,9 +21,17 @@ class EventsController < ApplicationController
 	end
 	
 	def vote_up
-		@recommendation = Recommendation.find(params[:id])
-		prev_votes = @recommendation.votes
-		@recommendation.update_attribute(:votes, prev_votes+1)
+		@event = Event.find(params[:id])
+		@recommendation = Recommendation.find(params[:rec_id])
+		@votes = Vote.find(:all, :conditions=>{:event_id=>@event.id, :user_id=>current_user.id, :recommendation_id=>@recommendation.id})
+		if @votes.empty?
+			@vote = current_user.votes.create({:event_id=>@event.id, :recommendation_id=>@recommendation.id})
+			
+			@vote.save
+		end
+		
+		#prev_votes = @recommendation.votes
+		#@recommendation.update_attribute(:votes, prev_votes+1)
 		redirect_to :back
 	end
 	
