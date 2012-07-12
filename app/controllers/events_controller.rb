@@ -7,7 +7,7 @@ class EventsController < ApplicationController
 		@event = Event.find(params[:id])
 		@today = @event.start_at.to_date
 		@tomorrow = @event.start_at.tomorrow.to_date
-		@recommendations = Recommendation.find(:all, :conditions => ["start_at between ? and ?", @today, @tomorrow])
+		@recommendations = Recommendation.find(:all, :conditions => {:event_id=> @event.id})
 		@time = @event.start_at
 		@time_end = @event.end_at
 
@@ -27,14 +27,16 @@ class EventsController < ApplicationController
 		@votes = Vote.find(:all, :conditions=>{:event_id=>@event.id, :user_id=>current_user.id})
 		if @votes.empty?
 			@vote = current_user.votes.create({:event_id=>@event.id, :recommendation_id=>@recommendation.id})
-			
 			@vote.save
+      flash[:success] = "Voted for #{@recommendation.name}"
     else
       #There should only be one element in @votes
       if @votes[0].recommendation_id != @recommendation.id
+          prev_rec = Recommendation.find(@votes[0].recommendation_id) 
+          flash[:success] = "Vote changed from #{prev_rec.name} to #{@recommendation.name}"
           @votes[0].update_attribute(:recommendation_id, @recommendation.id)
       else
-        flash[:error] = "Vote Failed"
+        flash[:error] = "Cannot Vote for #{@recommendation.name} twice"
       end
 		end
 		

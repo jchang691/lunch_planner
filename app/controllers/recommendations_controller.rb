@@ -14,7 +14,7 @@ class RecommendationsController < ApplicationController
 			  render 'new'
 			end
 		else
-			flash[:success] = "You have already made 2 Recs for the day"
+			flash[:success] = "You have already made a Recommendation for the day"
 			redirect_to :back
 		end
 	end
@@ -59,7 +59,7 @@ class RecommendationsController < ApplicationController
 			if id == x.user_id
 				count+= 1
 			end
-			return false if count >= 2
+			return false if count >= 1
 		end
 		true
 	end
