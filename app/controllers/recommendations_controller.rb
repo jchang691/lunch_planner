@@ -45,8 +45,11 @@ class RecommendationsController < ApplicationController
 	def destroy
 		eventId = Recommendation.find(params[:id]).event_id
 		event = Event.find(eventId)
+    Recommendation.find(params[:id]).votes.each do |rec|
+      rec.destroy
+    end
 		Recommendation.find(params[:id]).destroy
-		flash[:success] = "Recommendation destroyed."
+		flash[:success] = "Recommendation deleted."
 		redirect_to event
 	end
 	
