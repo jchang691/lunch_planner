@@ -4,10 +4,16 @@
         <%= @event.name %>
       </h1>
 	<%= link_to "Create a Rec", new_user_recommendation_path(:user_id=>current_user.id, :start_at=>@today, :event_id=>@event.id)%><br><br>
-	<% if !@recommendations.empty? %>
-		<% @recommendations.each do |rec| %>
+  <% if !@recommendations.empty? %>
+    <% @recommendations.each do |rec| %>
+      <% @show_button = true %>
+      <% rec.votes.each do |vote| %>
+        <% if current_user.id == vote.user_id %>
+          <% @show_button = false %>
+        <%end%>
+      <%end%>
  <pre><%= rec.votes.length %>  <%= link_to rec.name, [rec.user, rec] %>
-<%= link_to '+1', vote_up_events_path(:id=>@event.id, :rec_id=>rec.id), class: "btn btn-small"%>	<%= rec.description%></pre>
+<% if @show_button %><%= link_to '+1', vote_up_events_path(:id=>@event.id, :rec_id=>rec.id), class: "btn btn-small"%><%end%>	<%= rec.description%></pre>
 		<% end %>
 	<% else %>
 		<center><h3> There are no Recommendations </h3></center>

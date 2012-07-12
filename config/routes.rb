@@ -6,7 +6,6 @@ SampleApp::Application.routes.draw do
   resources :events do
 	get 'vote_up', :on => :collection
   end
-	
 
   resources :users do
 	resources :recommendations
