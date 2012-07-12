@@ -10,6 +10,7 @@ class EventsController < ApplicationController
 		@recommendations = Recommendation.find(:all, :conditions => ["start_at between ? and ?", @today, @tomorrow])
 		@time = @event.start_at
 		@time_end = @event.end_at
+
 	end
 	  
 	def new
@@ -23,11 +24,18 @@ class EventsController < ApplicationController
 	def vote_up
 		@event = Event.find(params[:id])
 		@recommendation = Recommendation.find(params[:rec_id])
-		@votes = Vote.find(:all, :conditions=>{:event_id=>@event.id, :user_id=>current_user.id, :recommendation_id=>@recommendation.id})
+		@votes = Vote.find(:all, :conditions=>{:event_id=>@event.id, :user_id=>current_user.id})
 		if @votes.empty?
 			@vote = current_user.votes.create({:event_id=>@event.id, :recommendation_id=>@recommendation.id})
 			
 			@vote.save
+    else
+      #There should only be one element in @votes
+      if @votes[0].recommendation_id != @recommendation.id
+          @votes[0].update_attribute(:recommendation_id, @recommendation.id)
+      else
+        flash[:error] = "Vote Failed"
+      end
 		end
 		
 		#prev_votes = @recommendation.votes
