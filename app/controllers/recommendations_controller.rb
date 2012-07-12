@@ -3,7 +3,8 @@ class RecommendationsController < ApplicationController
 	def create
 		@user = User.find(params[:user_id])
 		new_rec = Recommendation.new(params[:recommendation])
-		if can_create_rec(@user.id, new_rec.start_at)
+    eventId = new_rec.event_id
+		if can_create_rec(@user.id, new_rec.event_id)
 			@recommendation = @user.recommendations.create(params[:recommendation])
 			if @recommendation.save
 			  flash[:success] = "Recommendation Created"
@@ -14,7 +15,8 @@ class RecommendationsController < ApplicationController
 			  render 'new'
 			end
 		else
-			flash[:success] = "You have already made a Recommendation for the day"
+      event = Event.find(eventId)
+			flash[:success] = "You have already made a Recommendation for #{event.name}"
 			redirect_to :back
 		end
 	end
@@ -50,11 +52,9 @@ class RecommendationsController < ApplicationController
 	
   private
   
-	def can_create_rec(id, start)
+	def can_create_rec(id, event_id)
 		count = 0
-		today = start.to_date
-		tomorrow = start.tomorrow.to_date
-		rec = Recommendation.find(:all, :conditions => ["start_at between ? and ?", today, tomorrow])
+		rec = Recommendation.find(:all, :conditions => {:event_id=>event_id})
 		rec.each do |x|
 			if id == x.user_id
 				count+= 1
