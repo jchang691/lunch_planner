@@ -3,7 +3,7 @@ class RecommendationsController < ApplicationController
 	def create
 		@user = User.find(params[:user_id])
 		new_rec = Recommendation.new(params[:recommendation])
-    eventId = new_rec.event_id
+    	eventId = new_rec.event_id
 		if can_create_rec(@user.id, new_rec.event_id)
 			@recommendation = @user.recommendations.create(params[:recommendation])
 			if @recommendation.save

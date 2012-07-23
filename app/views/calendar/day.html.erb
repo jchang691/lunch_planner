@@ -6,7 +6,7 @@
 </h1>
 <p> 
 	<% if current_user.admin? %>
-		<%= link_to "Create an Event", create_event_path(:start_at => "#{@month_name} #{@day}, #{@year} "), class: "btn btn-large btn-primary" %><br><br>
+		<%= link_to "Create an Event", create_event_path, class: "btn btn-large btn-primary" %><br><br>
 	<% end %>
 	<% if @events.empty? %>
 		<center><h3> There are no events </h3></center>

@@ -148,13 +148,41 @@ aside {
 
 /* forms */
 
-input, textarea, select, .uneditable-input {
+input, textarea, .uneditable-input {
   border: 1px solid #bbb;
   width: 100%;
   padding: 10px;
   height: auto;
   margin-bottom: 15px;
   @include box_sizing;
+}
+
+textarea{
+  height: 150px;
+}
+
+select{
+  width: 11%;
+}
+
+#event_start_at_1i{
+  width: 15%;
+}
+
+#event_start_at_2i{
+  width: 21%;
+}
+
+#recommendation_start_at_1i{
+  width: 15%;
+}
+
+#recommendation_start_at_2i{
+  width: 21%;
+}
+
+#recommendation_start_at_4i{
+  width: 17%;
 }
 
 #error_explanation {
@@ -188,4 +216,9 @@ input, textarea, select, .uneditable-input {
 pre {
    font-family: "arial", arial, monospace;
    font-size: 12px;
+}
+
+.description, .link {
+  padding-top: 10px;
+  padding-bottom: 10px;
 }

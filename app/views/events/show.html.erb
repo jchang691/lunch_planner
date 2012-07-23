@@ -3,9 +3,9 @@
       <h1>
         <%= @event.name %>
       </h1>
-	<%= link_to "Create a Rec", new_user_recommendation_path(:user_id=>current_user.id, :start_at=>@today, :event_id=>@event.id)%><br><br>
+	<%= link_to "Create a Rec", new_user_recommendation_path(:user_id=>current_user.id, :event_id=>@event.id)%><br><br>
   <% if !@recommendations.empty? %>
-    <% @recommendations.each do |rec| %>
+    <% @recommendations.reverse_each do |rec| %>
       <% @show_button = true %>
       <% rec.votes.each do |vote| %>
         <% if current_user.id == vote.user_id %>

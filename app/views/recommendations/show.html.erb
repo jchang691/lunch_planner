@@ -1,20 +1,21 @@
 <% provide(:title, @user.name) %>
 <div class="row">
-  <aside class="span4">
+  <aside class="span8">
     <section>
 	  <h1>
 		<%= @recommendation.name %>
 	  </h1>
-	  <br>
 	  
     <div class="description">
 	    <b>Description:</b>
 	    <%= @recommendation.description %>
 	</div>
+	<div class="link">
 	  <% if current_user.admin? or current_user.id == @recommendation.user.id%>
-	  <%= link_to "delete", [@user, @recommendation], method: :delete,
+	  <%= link_to "Delete Recommendation", [@user, @recommendation], method: :delete,
                                   data: { confirm: "You sure?" } %>
 	  <% end %>
+	</div>
     </section>
   </aside>
 </div>

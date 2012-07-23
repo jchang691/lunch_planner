@@ -7,7 +7,6 @@ class Event < ActiveRecord::Base
   
   validates :name, presence: true, length: { maximum: 50 }
   validates :start_at, presence: true
-  validates :end_at, presence: true
   
   def init
 	self.votes ||= 0

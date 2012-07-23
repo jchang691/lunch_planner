@@ -8,6 +8,7 @@ class EventsController < ApplicationController
 		@today = @event.start_at.to_date
 		@tomorrow = @event.start_at.tomorrow.to_date
 		@recommendations = Recommendation.find(:all, :conditions => {:event_id=> @event.id})
+		sort_by_votes(@recommendations)
      
 	end
 	  
@@ -45,6 +46,7 @@ class EventsController < ApplicationController
 	
 	def create
 		@event = Event.new(params[:event])
+		@event.end_at = @event.start_at
 		if @event.save
 		  flash[:success] = "Event Created!"
 		  redirect_to @event
@@ -75,5 +77,17 @@ class EventsController < ApplicationController
 	
 	def admin_user
       redirect_to(root_path) unless current_user.admin?
+    end
+
+    def sort_by_votes(rec_array)
+    	rec_array.each_with_index do |rec, i|
+    		j = i-1
+    		while j >= 0
+    			break if rec_array[j].votes.length <= rec.votes.length
+    			rec_array[j+1] = rec_array[j]
+    			j = j-1
+    		end
+    		rec_array[j+1] = rec
+    	end
     end
 end
