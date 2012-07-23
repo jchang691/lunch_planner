@@ -212,6 +212,25 @@ select{
     }
   }
 }
+/* recommendations event */
+
+#add_vote, #add_vote_disabled{
+  float: left;
+  margin-right: 10px;
+}
+
+.recs {
+  list-style: none;
+  margin: 0;
+  li {
+    overflow: auto;
+    padding: 15px;
+    border-top: 1px solid $grayLighter;
+    &:last-child {
+      border-bottom: 1px solid $grayLighter;
+    }
+  }
+}
 
 pre {
    font-family: "arial", arial, monospace;

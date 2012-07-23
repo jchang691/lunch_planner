@@ -12,9 +12,34 @@
           <% @show_button = false %>
         <%end%>
       <%end%>
- <pre><%= rec.votes.length %>  <%= link_to rec.name, [rec.user, rec] %>
-<% if @show_button %><%= link_to '+1', vote_up_events_path(:id=>@event.id, :rec_id=>rec.id), class: "btn btn-small"%><%end%>	<%= rec.description%></pre>
+     <ul class="recs">
+      <li>
+        
+        
+          <% if @show_button %>
+            <%= link_to '+1', vote_up_events_path(:id=>@event.id, :rec_id=>rec.id), :id=>"add_vote", class: "btn btn-small"%>
+          <% else %>
+            <%= link_to '+1', vote_up_events_path(:id=>@event.id, :rec_id=>rec.id), :disabled=> true, :id=>"add_vote_disabled", class: "btn btn-small"%>
+            <script type="text/javascript">
+            $('#add_vote_disabled').click(function(e){
+              e.preventDefault();
+            });
+            </script>
+
+          <%end%>
+          <div>	
+            <%= rec.votes.length %>
+            <%= link_to rec.name, [rec.user, rec] %>
+            <div>
+              <%= rec.description%>
+            </div>
+          </div>
+        
+      </li>
+    </ul>
 		<% end %>
 	<% else %>
 		<center><h3> There are no Recommendations </h3></center>
 	<% end %>
+
+
