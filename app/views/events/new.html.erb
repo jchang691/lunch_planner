@@ -13,8 +13,7 @@
       <%= f.label "Start: Format( Month Date, Year, HH:MM:SS )" %>
       <%= f.text_field :start_at, :value => "#{params[:start_at]}" %>
 
-      <%= f.label "End: Format( Month Date, Year, HH:MM:SS )"%>
-      <%= f.text_field :end_at, :value => "#{params[:start_at]}"%>
+      <%= f.hidden_field :end_at, :value => "#{params[:start_at]}"%>
 
       <%= f.submit "Create Event", class: "btn btn-large btn-primary" %>
     <% end %>

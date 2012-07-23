@@ -7,9 +7,10 @@
 	  </h1>
 	  <br>
 	  
-    <p> Description:</p>
-    <p><%= @recommendation.description %> </p>
-	  
+    <div class="description">
+	    <b>Description:</b>
+	    <%= @recommendation.description %>
+	</div>
 	  <% if current_user.admin? or current_user.id == @recommendation.user.id%>
 	  <%= link_to "delete", [@user, @recommendation], method: :delete,
                                   data: { confirm: "You sure?" } %>

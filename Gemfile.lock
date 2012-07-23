@@ -162,8 +162,6 @@ GEM
     will_paginate (3.0.3)
     xpath (0.1.4)
       nokogiri (~> 1.3)
-    yelp (1.0.0)
-      json (>= 1.1.1)
 
 PLATFORMS
   x86-mingw32
@@ -188,4 +186,3 @@ DEPENDENCIES
   sqlite3 (= 1.3.5)
   uglifier (= 1.2.3)
   will_paginate (= 3.0.3)
-  yelp

@@ -13,14 +13,14 @@ class CalendarController < ApplicationController
   end
   
   def day
-	@year = (params[:year] || (Time.zone || Time).now.year).to_i
-	@month = (params[:month] || (Time.zone || Time).now.month).to_i
-	@month_name = Date::MONTHNAMES[@month]
-	@day = (params[:day] || (Time.zone || Time).now.day).to_i
-	date = Date.new(@year, @month, @day)
-	date_next = Date.new(@year, @month, @day+1)
-	@events = Event.find(:all, :conditions =>["start_at between ? and ?", date, date_next])
-	
+  	@year = (params[:year] || (Time.zone || Time).now.year).to_i
+  	@month = (params[:month] || (Time.zone || Time).now.month).to_i
+  	@month_name = Date::MONTHNAMES[@month]
+  	@day = (params[:day] || (Time.zone || Time).now.day).to_i
+  	date = DateTime.new(@year, @month, @day)
+  	date_next = DateTime.new(@year, @month, @day, 23, 59, 59)
+  	@events = Event.find(:all, :conditions =>["start_at between ? and ?", date, date_next])
+  	
   end
   
   private

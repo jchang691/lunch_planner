@@ -4,7 +4,6 @@ class EventsController < ApplicationController
 	 before_filter :admin_user, only: [:index, :create, :edit, :update, :destroy, :new]
 	
 	def show
-    @show_button = true
 		@event = Event.find(params[:id])
 		@today = @event.start_at.to_date
 		@tomorrow = @event.start_at.tomorrow.to_date
