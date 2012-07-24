@@ -11,7 +11,8 @@
       <%= f.text_field :name %>
 
       <%= f.label "Start:" %>
-      <%= f.date_select :start_at, :order => [:month, :day, :year], :datetime_separator=> ' at ' %><br>
+      <% date = params[:start_at].to_date %>
+      <%= f.date_select :start_at, :default=> date, :order => [:month, :day, :year], :datetime_separator=> ' at ' %><br>
 
       <%= f.submit "Create Event", class: "btn btn-large btn-primary" %>
     <% end %>

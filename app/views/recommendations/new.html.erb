@@ -11,9 +11,9 @@
       <%= f.text_field :name %>
 	  
 	  <%= f.label "Start:" %>
-      <%= f.datetime_select :start_at, :ampm=> true, :default=> Time.now, :order => [:month, :day, :year], :datetime_separator=> ' at ' %><br>
+      <%= f.time_select :start_at, :ampm=> true, :default=> Time.now, :datetime_separator=> ' at ' %><br>
 	  to<br>
-	  <%= f.datetime_select :start_at, :ampm=> true, :default=> Time.now+1.hour, :order => [:month, :day, :year], :datetime_separator=> ' at ' %><br>
+	  <%= f.time_select :start_at, :ampm=> true, :default=> Time.now+1.hour, :datetime_separator=> ' at ' %><br>
 	  <%= f.label :description %>
       <%= f.text_area :description%>
 	  

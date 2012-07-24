@@ -6,6 +6,7 @@ class EventsController < ApplicationController
 	def show
 		@event = Event.find(params[:id])
 		@today = @event.start_at.to_date
+		@today_month = @month_name = Date::MONTHNAMES[@today.month]
 		@tomorrow = @event.start_at.tomorrow.to_date
 		@recommendations = Recommendation.find(:all, :conditions => {:event_id=> @event.id})
 		sort_by_votes(@recommendations)

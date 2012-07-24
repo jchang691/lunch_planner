@@ -3,6 +3,7 @@
       <h1>
         <%= @event.name %>
       </h1>
+  <h3><%= "#{@today_month} #{@today.day}, #{@today.year}" %></h3><br>
 	<%= link_to "Create a Rec", new_user_recommendation_path(:user_id=>current_user.id, :event_id=>@event.id)%><br><br>
   <% if !@recommendations.empty? %>
     <% @recommendations.reverse_each do |rec| %>
@@ -28,7 +29,7 @@
 
           <%end%>
           <div>	
-            <%= rec.votes.length %>
+            <h3><%= rec.votes.length %></h3>
             <%= link_to rec.name, [rec.user, rec] %>
             <div>
               <%= rec.description%>
