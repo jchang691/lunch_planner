@@ -16,7 +16,7 @@
      <ul class="recs">
       <li>
         
-        
+          <div id="vote_num"><h3><%= rec.votes.length %></h3></div>
           <% if @show_button %>
             <%= link_to '+1', vote_up_events_path(:id=>@event.id, :rec_id=>rec.id), :id=>"add_vote", class: "btn btn-small"%>
           <% else %>
@@ -28,8 +28,8 @@
             </script>
 
           <%end%>
+          
           <div>	
-            <h3><%= rec.votes.length %></h3>
             <%= link_to rec.name, [rec.user, rec] %>
             <div>
               <%= rec.description%>
